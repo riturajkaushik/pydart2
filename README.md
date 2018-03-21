@@ -40,40 +40,37 @@ learning), and so on.
 ## Building and installation from source 
 For Python2 users, please apply the following commands:
 
-.. code-block:: bash
-
+```bash
    sudo apt-get install swig python-pip python-qt4 python-qt4-dev python-qt4-gl
    sudo pip install pydart2
-
+```
 
 First, please check out the repository.
 
-.. code-block:: bash
-
+```bash
    git clone https://github.com/riturajkaushik/pydart2.git
    cd pydart
-
+```
 
 The next step is to compile the package using setup.py
 
-If you have installed Dart from source and built it with option 'DDART_ENABLE_SMID=ON', then your dart library was built with CXX flag '-march=native'. So to match that, you have to build pydart2 with that CXX flag enabled. Otherwise pydart2 will give runtime error (stack smashing). So to compile pydart2 with '-march=native' flag, do the following:
+If you have installed Dart from source and it was built it with option **'-DDART_ENABLE_SMID=ON'**, then your dart library was built with CXX flag **'-march=native'**. So to match that, you have to build pydart2 with that CXX flag enabled. Otherwise pydart2 will give runtime error (stack smashing). So to compile pydart2 with '-march=native' flag, do the following:
 
-.. code-block:: bash
-
+```bash
     python setup.py build build_ext -DART_ENABLE_SMID=ON
+```
 
 Otherwise, do the following:
 
-.. code-block:: bash
-
+```bash
     python setup.py build build_ext
+```
 
 The final step is to install the python package as a development.
 
-.. code-block:: bash
-
+```bash
     python setup.py develop
-
+```
 
 ======
 ## Documentation
