@@ -49,7 +49,7 @@ First, please check out the repository.
 
 ```bash
    git clone https://github.com/riturajkaushik/pydart2.git
-   cd pydart
+   cd pydart2
 ```
 
 The next step is to compile the package using setup.py
@@ -57,7 +57,7 @@ The next step is to compile the package using setup.py
 If you have installed Dart from source and it was built it with option **'-DDART_ENABLE_SMID=ON'**, then your dart library was built with CXX flag **'-march=native'**. So to match that, you have to build pydart2 with that CXX flag enabled. Otherwise pydart2 will give runtime error (stack smashing). So to compile pydart2 with '-march=native' flag, do the following:
 
 ```bash
-    python setup.py build build_ext -DART_ENABLE_SMID=ON
+    python setup.py -DART_ENABLE_SMID=ON build build_ext 
 ```
 
 Otherwise, do the following:
