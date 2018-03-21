@@ -34,6 +34,11 @@ CXX_FLAGS = '-Wall -msse2 -fPIC -std=c++11 -Xlinker -rpath /usr/local/lib '
 CXX_FLAGS += '-O3 -DNDEBUG -shared '
 CXX_FLAGS += '-g -fno-omit-frame-pointer -fno-inline-functions '
 CXX_FLAGS += '-fno-optimize-sibling-calls '
+if len(sys.argv) > 1:
+    for opt in range(len(sys.argv)):
+        if sys.argv[opt] == '-DART_ENABLE_SIMD=ON':
+            CXX_FLAGS += '-march=native '
+            break
 
 
 if PYDART2_BULLET_FOUND:
