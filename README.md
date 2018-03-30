@@ -42,7 +42,6 @@ For Python2 users, please apply the following commands:
 
 ```bash
    sudo apt-get install swig python-pip python-qt4 python-qt4-dev python-qt4-gl
-   sudo pip install pydart2
 ```
 
 First, please check out the repository.
