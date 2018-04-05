@@ -168,6 +168,15 @@ void SKEL(setForces)(int wid, int skid, double* inv, int ndofs) {
     skel->setForces(read(inv, ndofs));
 }
 
+void SKEL(getCommands)(int wid, int skid, double* outv, int ndofs) {
+    dart::dynamics::SkeletonPtr skel = GET_SKELETON(wid, skid);
+    write(skel->getCommands(), outv);
+}
+
+void SKEL(setCommands)(int wid, int skid, double* inv, int ndofs) {
+    dart::dynamics::SkeletonPtr skel = GET_SKELETON(wid, skid);
+    skel->setCommands(read(inv, ndofs));
+}
 ////////////////////////////////////////
 // Skeleton::Difference Functions
 void SKEL(getPositionDifferences)(int wid, int skid,

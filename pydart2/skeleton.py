@@ -136,6 +136,25 @@ class Skeleton(object):
         """ Setter also updates the internal skeleton kinematics """
         self.set_positions(_q)
 
+    ###########
+    def commands(self):
+        comms = papi.skeleton__getCommands(self.world.id, self.id, self.ndofs)
+        # return comms
+        return SkelVector(comms, self)
+
+    @property
+    def comms(self):
+        return self.commands()
+
+    def set_commands(self, _comms):
+        papi.skeleton__setCommands(self.world.id, self.id, _comms)
+
+    @comms.setter
+    def comms(self, _comms):
+        """ Setter also updates the internal skeleton kinematics """
+        self.set_commands(_comms)
+    ##########
+
     def velocities(self):
         qdot = papi.skeleton__getVelocities(self.world.id, self.id, self.ndofs)
         return SkelVector(qdot, self)
