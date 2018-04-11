@@ -19,6 +19,7 @@ def check_file(directories, file):
 
 
 DIR = 'pydart2/'
+# dirs = ['/nfs/hal01/rkaushik/installations/include', '/usr/include', '/usr/local/include']
 dirs = ['/usr/include', '/usr/local/include']
 print("-- check DART headers --")
 PYDART2_BULLET_FOUND = \
@@ -30,7 +31,13 @@ PYDART2_ODE_FOUND = \
 print("PYDART2_ODE_FOUND = %s" % PYDART2_ODE_FOUND)
 print("------------------------")
 
+PYDART2_GUI_FOUND = \
+    check_file(dirs, "dart/gui/gui.hpp")
+print("PYDART2_GUI_FOUND = %s" % PYDART2_GUI_FOUND)
+print("------------------------")
+
 CXX_FLAGS = '-Wall -msse2 -fPIC -std=c++11 -Xlinker -rpath /usr/local/lib '
+# CXX_FLAGS = '-Wall -msse2 -fPIC -std=c++11 -Xlinker -rpath /nfs/hal01/rkaushik/installations/lib '
 CXX_FLAGS += '-O3 -DNDEBUG -shared '
 CXX_FLAGS += '-g -fno-omit-frame-pointer -fno-inline-functions '
 CXX_FLAGS += '-fno-optimize-sibling-calls '
@@ -40,11 +47,12 @@ if len(sys.argv) > 1:
             CXX_FLAGS += '-march=native '
             break
 
-
 if PYDART2_BULLET_FOUND:
     CXX_FLAGS += " -DPYDART2_BULLET_FOUND"
 if PYDART2_ODE_FOUND:
     CXX_FLAGS += " -DPYDART2_ODE_FOUND"
+if PYDART2_GUI_FOUND:
+    CXX_FLAGS += " -DPYDART2_GUI_FOUND"
 
 print("CXX_FLAGS: %s" % str(CXX_FLAGS))
 
@@ -91,15 +99,17 @@ for d in NP_DIRS:
 include_dirs += NP_DIRS
 
 libraries = list()
-libraries += ['dart', 'dart-gui']
+libraries += ['dart']
+if PYDART2_GUI_FOUND:
+    libraries += ['dart-gui']
 libraries += ['dart-optimizer-nlopt',
               'dart-planning', 'dart-utils', 'dart-utils-urdf', ]
 
 # libraries += [current_python]
-if _platform == "linux" or _platform == "linux2":
+if (_platform == "linux" or _platform == "linux2") and PYDART2_GUI_FOUND:
     libraries += ['GL', 'glut', 'Xmu', 'Xi']
     CXX_FLAGS += '-fno-inline-functions-called-once'
-elif _platform == "darwin":
+elif _platform == "darwin" and PYDART2_GUI_FOUND:
     CXX_FLAGS += '-framework Cocoa '
     CXX_FLAGS += '-framework OpenGL '
     CXX_FLAGS += '-framework GLUT '
@@ -144,6 +154,7 @@ pydart2_api = Extension('_pydart2_api',
                         include_dirs=include_dirs,
                         libraries=libraries,
                         library_dirs=['/usr/local/lib'],
+                        # library_dirs=['/nfs/hal01/rkaushik/installations/lib'],
                         extra_compile_args=CXX_FLAGS.split(),
                         swig_opts=swig_opts,
                         sources=sources,

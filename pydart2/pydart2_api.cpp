@@ -67,13 +67,13 @@ void MARKER(getWorldPosition)(int wid, int skid, int mid, double outv3[3]) {
     dart::dynamics::Marker* marker = GET_MARKER(wid, skid, mid);
     write(marker->getWorldPosition(), outv3);
 }
-
+#ifdef PYDART2_GUI_FOUND
 void MARKER(render)(int wid, int skid, int mid) {
     dart::dynamics::Marker* marker = GET_MARKER(wid, skid, mid);
     dart::gui::RenderInterface* ri = Manager::getRI();
     drawMarker(ri, marker);
 }
-
+#endif
 ////////////////////////////////////////////////////////////////////////////////
 // Collision Result
 int COLLISION_RESULT(getNumContacts)(int wid) {
@@ -137,12 +137,12 @@ std::vector<int> COLLISION_RESULT(getCollidingBodyNodes)(int wid) {
     }
     return ret;
 }
-
+#ifdef PYDART2_GUI_FOUND
 void COLLISION_RESULT(renderContact)(double inv6[6], double size, double scale) {
     dart::gui::RenderInterface* ri = Manager::getRI();
     drawContact(ri, read(inv6, 6), size, scale);
 }
-
+#endif
 ////////////////////////////////////////////////////////////////////////////////
 // Constraints
 int addBallJointConstraint(int wid, int skid1, int bid1, int skid2, int bid2,

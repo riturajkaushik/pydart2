@@ -30,8 +30,9 @@ int MARKER(getBodyNode)(int wid, int skid, int mid);
 void MARKER(getLocalPosition)(int wid, int skid, int mid, double outv3[3]);
 void MARKER(setLocalPosition)(int wid, int skid, int mid, double inv3[3]);
 void MARKER(getWorldPosition)(int wid, int skid, int mid, double outv3[3]);
+#ifdef PYDART2_GUI_FOUND
 void MARKER(render)(int wid, int skid, int mid);
-
+#endif
 ////////////////////////////////////////////////////////////////////////////////
 // Contacts
 #define COLLISION_RESULT(funcname) collisionresult__##funcname
@@ -40,8 +41,9 @@ void MARKER(render)(int wid, int skid, int mid);
 int COLLISION_RESULT(getNumContacts)(int wid);
 void COLLISION_RESULT(getContacts)(int wid, double* outv, int nout);
 std::vector<int> COLLISION_RESULT(getCollidingBodyNodes)(int wid);
+#ifdef PYDART2_GUI_FOUND
 void COLLISION_RESULT(renderContact)(double inv6[6], double size, double scale);
-
+#endif
 ////////////////////////////////////////////////////////////////////////////////
 // Constraints
 int addBallJointConstraint(int wid, int skid1, int bid1, int skid2, int bid2,

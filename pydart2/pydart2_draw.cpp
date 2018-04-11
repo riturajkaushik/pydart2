@@ -19,7 +19,7 @@
 // #include "dart/constraint/ConstraintSolver.hpp"
 // #include "dart/collision/CollisionDetector.hpp"
 // #endif
-
+#ifdef PYDART2_GUI_FOUND
 void drawWorld(
     dart::gui::RenderInterface* ri,
     dart::simulation::WorldPtr world) {
@@ -456,3 +456,4 @@ void drawContact(
     ri->popMatrix();
     ri->drawLineSegments(verts, conn);
 }
+#endif

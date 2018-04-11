@@ -28,7 +28,9 @@ const char* SHAPE(getType)(int wid, int skid, int bid, int sid);
 int SHAPE(getTypeID)(int wid, int skid, int bid, int sid);
 
 // const char* SHAPE(getType)(int wid, int skid, int bid, int sid);
+#ifdef PYDART2_GUI_FOUND
 void SHAPE(render)(int wid, int skid, int bid, int sid);
+#endif
 void SHAPE(getBoundingBoxMin)(int wid, int skid, int bid, int sid, double outv3[3]);
 void SHAPE(getBoundingBoxMax)(int wid, int skid, int bid, int sid, double outv3[3]);
 

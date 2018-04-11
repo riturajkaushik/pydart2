@@ -11,7 +11,9 @@
 #ifdef PYDART2_ODE_FOUND
 #include "dart/collision/ode/OdeCollisionDetector.hpp"
 #endif
+#ifdef PYDART2_GUI_FOUND
 #include "dart/gui/gui.hpp"
+#endif
 #include "dart/utils/utils.hpp"
 #include "dart/utils/urdf/DartLoader.hpp"
 
@@ -24,9 +26,11 @@ public:
     static void init();
     static void destroy();
     static Manager* getInstance() { return g_manager; }
+#ifdef PYDART2_GUI_FOUND
     static dart::gui::RenderInterface* getRI() {
         return g_ri;
     }
+#endif
 
     static dart::simulation::WorldPtr world(int index = 0);
     static dart::dynamics::SkeletonPtr skeleton(int index);
@@ -37,8 +41,9 @@ public:
     static bool g_verbose;
 protected:
     static Manager* g_manager;
+#ifdef PYDART2_GUI_FOUND
     static dart::gui::RenderInterface* g_ri;
-
+#endif
     // std::vector<dart::simulation::WorldPtr> worlds;
     int next_id;
     std::map<int, dart::simulation::WorldPtr> worlds;

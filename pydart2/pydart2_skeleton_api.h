@@ -6,9 +6,10 @@
 // Skeleton
 #define SKEL(funcname) skeleton__##funcname
 #define GET_SKELETON(wid, skid) Manager::skeleton(wid, skid);
-
+#ifdef PYDART2_GUI_FOUND
 void SKEL(render)(int wid, int skid);
 void SKEL(renderWithColor)(int wid, int skid, double inv4[4]);
+#endif
 const char* SKEL(getName)(int wid, int skid);
 double SKEL(getMass)(int wid, int skid);
 

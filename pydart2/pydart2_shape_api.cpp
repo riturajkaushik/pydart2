@@ -112,13 +112,13 @@ int SHAPE(getTypeID)(int wid, int skid, int bid, int sid) {
     return -1;
 }
 
-
+#ifdef PYDART2_GUI_FOUND
 void SHAPE(render)(int wid, int skid, int bid, int sid) {
     dart::dynamics::Shape* shape = GET_SHAPE(wid, skid, bid, sid);
     dart::gui::RenderInterface* ri = Manager::getRI();
     drawShape(ri, shape);
 }
-
+#endif
 void SHAPE(getBoundingBoxMin)(int wid, int skid, int bid, int sid, double outv3[3]) {
     dart::dynamics::Shape* shape = GET_SHAPE(wid, skid, bid, sid);
     write(shape->getBoundingBox().getMin(), outv3);

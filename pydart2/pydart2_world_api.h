@@ -16,8 +16,9 @@ int WORLD(getNumSkeletons)(int wid);
 void WORLD(reset)(int wid);
 void WORLD(step)(int wid);
 void WORLD(checkCollision)(int wid);
+#ifdef PYDART2_GUI_FOUND
 void WORLD(render)(int wid);
-
+#endif
 ////////////////////////////////////////
 // World::Time Functions
 void WORLD(setTimeStep)(int wid, double _timeStep);

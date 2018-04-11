@@ -20,12 +20,14 @@
 #include "dart/dynamics/Marker.hpp"
 #include "dart/constraint/ConstraintSolver.hpp"
 #include "dart/collision/CollisionDetector.hpp"
+#ifdef PYDART2_GUI_FOUND
 #include "dart/gui/LoadGlut.hpp"
 #include "dart/gui/GLFuncs.hpp"
 #include "dart/gui/GraphWindow.hpp"
+#endif
 #include "dart/utils/FileInfoWorld.hpp"
 
-
+#ifdef PYDART2_GUI_FOUND
 void drawWorld(
     dart::gui::RenderInterface* ri,
     dart::simulation::WorldPtr world);
@@ -81,5 +83,5 @@ void drawContact(
     const Eigen::Vector6d& state,
     double size,
     double scale);
-
+#endif
 #endif // #ifndef PYDART2_PYDART2_DRAW_H

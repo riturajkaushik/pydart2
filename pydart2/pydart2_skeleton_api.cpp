@@ -19,6 +19,7 @@ using namespace pydart;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Skeleton
+#ifdef PYDART2_GUI_FOUND
 void SKEL(render)(int wid, int skid) {
     dart::dynamics::SkeletonPtr skel = GET_SKELETON(wid, skid);
     dart::gui::RenderInterface* ri = Manager::getRI();
@@ -32,7 +33,7 @@ void SKEL(renderWithColor)(int wid, int skid, double inv4[4]) {
     // MSG << "color = " << color.transpose() << "\n";
     drawSkeleton(ri, skel.get(), color, false);
 }
-
+#endif
 const char* SKEL(getName)(int wid, int skid) {
     dart::dynamics::SkeletonPtr skel = GET_SKELETON(wid, skid);
     return skel->getName().c_str();

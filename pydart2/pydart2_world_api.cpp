@@ -95,12 +95,13 @@ void WORLD(checkCollision)(int wid) {
     world->getConstraintSolver()->solve();
 }
 
+#ifdef PYDART2_GUI_FOUND
 void WORLD(render)(int wid) {
     dart::simulation::WorldPtr world = GET_WORLD(wid);
     dart::gui::RenderInterface* ri = Manager::getRI();
     drawWorld(ri, world);
 }
-
+#endif
 ////////////////////////////////////////
 // World::Time Functions
 
