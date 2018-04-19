@@ -53,6 +53,8 @@ First, please check out the repository.
 
 The next step is to compile the package using setup.py
 
+On the cluster/server, use the branch ```on_cluster``` as it has conditional building of graphics related things depending upon the availability of graphics headers in dart/includes.
+
 If you have installed Dart from source and it was built it with option **'-DDART_ENABLE_SMID=ON'**, then your dart library was built with CXX flag **'-march=native'**. So to match that, you have to build pydart2 with that CXX flag enabled. Otherwise pydart2 will give runtime error (stack smashing). So to compile pydart2 with '-march=native' flag, do the following:
 
 ```bash
