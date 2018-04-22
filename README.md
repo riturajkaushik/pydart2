@@ -82,6 +82,10 @@ You can also install it as
 * Build pydart2 without the enviromnet activated.
 * Activate the conda enviroment and now install it using ```python setup.py install``` command. If you need to use ```sudo``` then use the complete path to the enviromnet's as ```sudo ~/path/to/env_name/bin/python setup.py install``` 
 
+### To use pydart2 on cluster/server without graphics
+
+When graphics is not found, libdart doesn't install the graphics reated header files. This will cause this branch of pydart2 fail while building as it requires to include gui headers of libdart. To use it on cluster/server use the ```on_cluster``` branch of pydart2 which conditionally builds graphics related codes depending upon the availability of the gui headers of libdart. 
+
 ### You might face the following issues:
 
 ```bash
