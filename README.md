@@ -53,10 +53,12 @@ First, please check out the repository.
 
 The next step is to compile the package using setup.py
 
-If you have installed Dart from source and it was built it with option **'-DDART_ENABLE_SMID=ON'**, then your dart library was built with CXX flag **'-march=native'**. So to match that, you have to build pydart2 with that CXX flag enabled. Otherwise pydart2 will give runtime error (stack smashing). So to compile pydart2 with '-march=native' flag, do the following:
+On the cluster/server, use the branch ```on_cluster``` as it has conditional building of graphics related things depending upon the availability of graphics headers in dart/includes.
+
+If you have installed Dart from source and it was built it with option **'-DDART_ENABLE_SIMD=ON'**, then your dart library was built with CXX flag **'-march=native'**. So to match that, you have to build pydart2 with that CXX flag enabled. Otherwise pydart2 will give runtime error (stack smashing). So to compile pydart2 with '-march=native' flag, do the following:
 
 ```bash
-    python setup.py build build_ext -DART_ENABLE_SMID=ON 
+    python setup.py build build_ext -DART_ENABLE_SIMD=ON 
 ```
 
 Otherwise, do the following:
@@ -70,12 +72,35 @@ The final step is to install the python package as a development.
 ```bash
     python setup.py develop
 ```
+You can also install it as
+
+```bash
+    python setup.py install
+```
+### To use pydart2 in ```Conda``` environment:
+
+* Build pydart2 without the enviromnet activated.
+* Activate the conda enviroment and now install it using ```python setup.py install``` command. If you need to use ```sudo``` then use the complete path to the enviromnet's as ```sudo ~/path/to/env_name/bin/python setup.py install``` 
+
+### To use pydart2 on cluster/server without graphics
+
+When graphics is not found, libdart doesn't install the graphics reated header files. This will cause this branch of pydart2 fail while building as it requires to include gui headers of libdart. To use it on cluster/server use the ```on_cluster``` branch of pydart2 which conditionally builds graphics related codes depending upon the availability of the gui headers of libdart. 
+
+### You might face the following issues:
+
+```bash
+import _pydart2_api
+ImportError: numpy.core.multiarray failed to import
+```
+This happens when numpy version using which the pydart2 was build is different from ```Conda``` environments numpy. Make numpy version same for both.
+
+```bash
+pydart2: segmentation falt(0x0001020001) 
+```
+```or any memory alignment related runtime error```
+
+This happens when dart c++ library was built with flag -DDART_ENABLE_SIMD=ON, but pydart2 was built without it or vice versa. Check c++ -march flag while building pydart2. With -DDART_ENABLE_SIMD=ON option, you should see -march=native flag in c++ flags.
 
 ======
 ## Documentation
 + http://pydart2.readthedocs.io/en/latest/
-
-======
-## Contact
-Please contact me when you have questions or suggestions: sehoon.ha@gmail.com
-Note: I am much more responsive for emails than pull-requests!
